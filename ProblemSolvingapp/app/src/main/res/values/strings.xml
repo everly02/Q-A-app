@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Problem-Solving app</string>
+    <string name="question_title">Question Title</string>
+    <string name="question_content">Question Content</string>
+    <string name="submit_question">Submit Question</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="send">Send</string>
+
+
+</resources>
