@@ -1,0 +1,126 @@
+[
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\drawable_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\drawable\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\layout_fragment_qa.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\layout\\fragment_qa.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\drawable_ic_qa.png.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\drawable\\ic_qa.png"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\drawable_ic_ask_ai.png.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\drawable\\ic_ask_ai.png"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\drawable_ic_add.png.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\drawable\\ic_add.png"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "com.example.problem_solvingapp-debug-32:/xml_network_security_config.xml.flat",
+        "source": "com.example.problem_solvingapp-main-34:/xml/network_security_config.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\layout_fragment_askai.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\layout\\fragment_askai.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\menu_bottom_nav_menu.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\menu\\bottom_nav_menu.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\layout_question_item.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\layout\\question_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\layout_fragment_profile.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\drawable_ic_profile.png.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\drawable\\ic_profile.png"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\layout_item_message.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\layout\\item_message.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\layout_activity_ask_question.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\layout\\activity_ask_question.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\layout_activity_question_detail.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\layout\\activity_question_detail.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\layout_activity_add_answer.xml.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\layout\\activity_add_answer.xml"
+    },
+    {
+        "merged": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-debug-32:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\Eliezer\\.gradle\\daemon\\8.4\\com.example.problem_solvingapp-main-34:\\mipmap-hdpi\\ic_launcher_round.webp"
+    }
+]
