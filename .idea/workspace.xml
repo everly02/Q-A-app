@@ -101,6 +101,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="ProjectErrors" />
   </component>
@@ -124,7 +127,7 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
     "last_directory_selection": "C:/Users/Eliezer/AndroidStudioProjects/ProblemSolvingapp/app/src/main/res/values",
-    "last_opened_file_path": "C:/Users/Eliezer/CODE/gemini-android",
+    "last_opened_file_path": "C:/Users/Eliezer/CODE/some_android_app/thunderbird-android",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
