@@ -1,4 +1,4 @@
-package com.example.problem_solvingapp;
+package com.example.problem_solvingapp.datas;
 import com.google.gson.annotations.SerializedName;
 public class QuestionDetail {
     @SerializedName("TITLE")

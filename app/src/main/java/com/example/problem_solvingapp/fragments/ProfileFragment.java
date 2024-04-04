@@ -1,4 +1,4 @@
-package com.example.problem_solvingapp;
+package com.example.problem_solvingapp.fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.problem_solvingapp.R;
 
 public class ProfileFragment extends Fragment {
 

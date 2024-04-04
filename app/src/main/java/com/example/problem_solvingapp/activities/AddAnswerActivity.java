@@ -1,4 +1,4 @@
-package com.example.problem_solvingapp;
+package com.example.problem_solvingapp.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -7,6 +7,11 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.problem_solvingapp.ApiServiceSingleton;
+import com.example.problem_solvingapp.QuestionApiService;
+import com.example.problem_solvingapp.R;
+import com.example.problem_solvingapp.datas.Answer;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

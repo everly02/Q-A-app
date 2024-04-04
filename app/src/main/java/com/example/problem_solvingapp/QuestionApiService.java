@@ -1,5 +1,10 @@
 package com.example.problem_solvingapp;
 
+import com.example.problem_solvingapp.datas.Answer;
+import com.example.problem_solvingapp.datas.Question;
+import com.example.problem_solvingapp.datas.QuestionDetail;
+import com.example.problem_solvingapp.datas.li_item;
+
 import java.util.List;
 
 import okhttp3.ResponseBody;

@@ -1,4 +1,4 @@
-package com.example.problem_solvingapp;
+package com.example.problem_solvingapp.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.problem_solvingapp.activities.QuestionDetailActivity;
+import com.example.problem_solvingapp.R;
+import com.example.problem_solvingapp.datas.li_item;
 
 import java.util.List;
 

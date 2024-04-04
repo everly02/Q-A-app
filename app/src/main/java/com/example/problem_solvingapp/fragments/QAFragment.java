@@ -1,4 +1,4 @@
-package com.example.problem_solvingapp;
+package com.example.problem_solvingapp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,20 +6,23 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 
+import com.example.problem_solvingapp.ApiServiceSingleton;
+import com.example.problem_solvingapp.activities.AskQuestionActivity;
+import com.example.problem_solvingapp.QuestionApiService;
+import com.example.problem_solvingapp.adapters.QuestionsAdapter;
+import com.example.problem_solvingapp.R;
+import com.example.problem_solvingapp.datas.li_item;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;

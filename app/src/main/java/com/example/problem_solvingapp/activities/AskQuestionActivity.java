@@ -1,4 +1,4 @@
-package com.example.problem_solvingapp;
+package com.example.problem_solvingapp.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,6 +6,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.problem_solvingapp.ApiServiceSingleton;
+import com.example.problem_solvingapp.QuestionApiService;
+import com.example.problem_solvingapp.R;
+import com.example.problem_solvingapp.datas.AskQuestion;
+import com.example.problem_solvingapp.datas.Question;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

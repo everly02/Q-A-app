@@ -1,4 +1,4 @@
-package com.example.problem_solvingapp;
+package com.example.problem_solvingapp.datas;
 
 public class AskQuestion {
     private String title;

@@ -1,4 +1,4 @@
-package com.example.problem_solvingapp;
+package com.example.problem_solvingapp.activities;
 
 import android.os.Bundle;
 
@@ -7,6 +7,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import com.example.problem_solvingapp.AskaiFragment;
+import com.example.problem_solvingapp.R;
+import com.example.problem_solvingapp.fragments.ProfileFragment;
+import com.example.problem_solvingapp.fragments.QAFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
