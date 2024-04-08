@@ -1,0 +1,31 @@
+package com.example.problem_solvingapp;
+
+import com.example.problem_solvingapp.datas.Answer;
+import com.example.problem_solvingapp.datas.Question;
+import com.example.problem_solvingapp.datas.QuestionDetail;
+import com.example.problem_solvingapp.datas.li_item;
+
+import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+
+public interface QuestionApiService {
+    @GET("/questions")
+    Call<List<li_item>> getQuestions();
+
+    @POST("/ask")
+    Call<ResponseBody> postQuestion(@Body Question question);
+
+    @GET("/question/{questionID}")
+    Call<QuestionDetail> getQuestionDetail(@Path("questionID") int questionID);
+
+    @POST("/answer/{questionID}")
+    Call<ResponseBody> postAnswer(@Path("questionID") int questionID, @Body Answer answer);
+}
+
+

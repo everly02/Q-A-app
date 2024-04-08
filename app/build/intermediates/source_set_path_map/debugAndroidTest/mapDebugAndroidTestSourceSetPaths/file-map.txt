@@ -1,6 +1,0 @@
-com.example.problem_solvingapp.test.app-core-1.5.0-0 C:\Users\Eliezer\.gradle\caches\transforms-3\72ce88fbdfa81d1e37aacc5d7a03dc5b\transformed\core-1.5.0\res
-com.example.problem_solvingapp.test.app-annotation-experimental-1.3.0-1 C:\Users\Eliezer\.gradle\caches\transforms-3\d64f4e95b74d39450dc629929b99fb01\transformed\annotation-experimental-1.3.0\res
-com.example.problem_solvingapp.test.app-androidTest-2 C:\Users\Eliezer\AndroidStudioProjects\ProblemSolvingapp\app\build\generated\res\resValues\androidTest\debug
-com.example.problem_solvingapp.test.app-mergeDebugAndroidTestResources-3 C:\Users\Eliezer\AndroidStudioProjects\ProblemSolvingapp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
-com.example.problem_solvingapp.test.app-mergeDebugAndroidTestResources-4 C:\Users\Eliezer\AndroidStudioProjects\ProblemSolvingapp\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
-com.example.problem_solvingapp.test.app-debugAndroidTest-5 C:\Users\Eliezer\AndroidStudioProjects\ProblemSolvingapp\app\build\intermediates\merged_res\debugAndroidTest\mergeDebugAndroidTestResources
