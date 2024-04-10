@@ -12,9 +12,6 @@ import android.widget.TextView;
 import com.example.problem_solvingapp.ApiServiceSingleton;
 import com.example.problem_solvingapp.QuestionApiService;
 import com.example.problem_solvingapp.R;
-import com.example.problem_solvingapp.datas.QuestionDetail;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

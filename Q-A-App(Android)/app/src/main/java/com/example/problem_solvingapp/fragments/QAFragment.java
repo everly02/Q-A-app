@@ -1,25 +1,26 @@
 package com.example.problem_solvingapp.fragments;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.example.problem_solvingapp.ApiServiceSingleton;
-import com.example.problem_solvingapp.activities.AskQuestionActivity;
 import com.example.problem_solvingapp.QuestionApiService;
-import com.example.problem_solvingapp.adapters.QuestionsAdapter;
 import com.example.problem_solvingapp.R;
-import com.example.problem_solvingapp.datas.li_item;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.problem_solvingapp.RetrofitClientInstance;
+import com.example.problem_solvingapp.adapters.QACardAdapter;
+import com.example.problem_solvingapp.data.Question;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,63 +30,82 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class QAFragment extends Fragment {
+    private RecyclerView recyclerView;
+    private QACardAdapter adapter;
+    private List<Question> itemList;
+
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Indicate that this fragment would like to influence the set of actions in the action bar.
+        setHasOptionsMenu(true);
+    }
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_qa, container, false);
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState){
+        super.onViewCreated(view, savedInstanceState);
+        recyclerView = view.findViewById(R.id.recyclerview);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        itemList = new ArrayList<>();
+        // TODO:
+        adapter = new QACardAdapter(itemList);
+        recyclerView.setAdapter(adapter);
+    }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        inflater.inflate(R.menu.top_app_bar, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_qa, container, false);
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        FloatingActionButton fab = view.findViewById(R.id.fab_ask);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), AskQuestionActivity.class);
-                startActivity(intent);
-            }
-        });
-        fetchQuestions();
+        int id = item.getItemId();
 
-        return view;
-    }
-    private void showQuestions(List<li_item> questions) {
-        RecyclerView recyclerView = requireView().findViewById(R.id.questionsRecyclerView);
-        QuestionsAdapter adapter = new QuestionsAdapter(getContext(), questions);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+        if (id == R.id.action_filt) {
+            // Handle the favorite action
+            return true;
+        } else if (id == R.id.action_sort) {
+            // Handle the search action
+            return true;
+        }
 
+        return super.onOptionsItemSelected(item);
     }
     public void fetchQuestions() {
-        QuestionApiService apiService = ApiServiceSingleton.getApiService();
-        apiService.getQuestions().enqueue(new Callback<List<li_item>>() {
+        QuestionApiService service = RetrofitClientInstance.getRetrofitInstance().create(QuestionApiService.class);
+        Call<List<Question>> call = service.getAllQuestions();
+        call.enqueue(new Callback<List<Question>>() {
             @Override
-            public void onResponse(@NonNull Call<List<li_item>> call, @NonNull Response<List<li_item>> response) {
-                if (response.isSuccessful()) {
-
-                    List<li_item> questions = new ArrayList<>();
-
-                    assert response.body() != null;
-                    for (li_item item : response.body()) {
-                        questions.add(item);
-                        Log.d("QuestionTitle", "Title: " + item.getTitle()); // 同时打印标题到日志
-                    }
-                    showQuestions(response.body());
-                    for (li_item question : questions) {
-                        Log.d("id", "id:"+question.getQuestionID());
-                        Log.d("QuestionTitle", "Title: " + question.getTitle());
-                    }
+            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    updateRecyclerView(response.body());
                 } else {
-                    Log.e("QuestionFetchError", "Failed to fetch questions");
 
                 }
             }
 
-
             @Override
-            public void onFailure(Call<List<li_item>> call, Throwable t) {
-                // 网络错误处理
-                Log.e("QuestionList", "Network error", t);
+            public void onFailure(Call<List<Question>> call, Throwable t) {
+
             }
         });
     }
+    @SuppressLint("NotifyDataSetChanged")
+    private void updateRecyclerView(List<Question> questions) {
 
+        QACardAdapter adapter = (QACardAdapter) recyclerView.getAdapter();
+        if (adapter != null) {
+            adapter.setItemList(questions);
+            adapter.notifyDataSetChanged();
+        }
+    }
 }
+
+
+
