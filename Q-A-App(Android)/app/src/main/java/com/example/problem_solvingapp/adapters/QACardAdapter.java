@@ -1,6 +1,10 @@
 package com.example.problem_solvingapp.adapters;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.problem_solvingapp.R;
+import com.example.problem_solvingapp.activities.QuestionDetailActivity;
 import com.example.problem_solvingapp.data.Question;
 
 import java.util.List;
@@ -16,9 +21,10 @@ import java.util.List;
 public class QACardAdapter extends RecyclerView.Adapter<QACardAdapter.ViewHolder> {
 
     private List<Question> itemList;
-
-    public QACardAdapter(List<Question> itemList) {
+    private OnItemClickListener listener;
+    public QACardAdapter(List<Question> itemList,OnItemClickListener listener) {
         this.itemList = itemList;
+        this.listener = listener;
     }
 
     @Override
@@ -53,14 +59,22 @@ public class QACardAdapter extends RecyclerView.Adapter<QACardAdapter.ViewHolder
         TextView viewsTextView;
         TextView commentsTextView;
 
-        ViewHolder(View itemView) {
+        public ViewHolder(View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             usernameTextView = itemView.findViewById(R.id.usernameTextView);
-            // 注意: 这里假设你在small_card.xml中的TextView有相应的ID
             likesTextView = itemView.findViewById(R.id.likesLayout).findViewById(R.id.approvesTextView);
             viewsTextView = itemView.findViewById(R.id.viewsLayout).findViewById(R.id.viewsLayout);
             commentsTextView = itemView.findViewById(R.id.commentsLayout).findViewById(R.id.reviewsTextView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) { // Position is valid
+                        listener.onItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

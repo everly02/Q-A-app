@@ -1,10 +1,10 @@
 const express = require('express');
 const mysql = require('mysql2');
-const bodyParser = require('body-parser');
-const apiRoutes = require('./routes/apiRoutes');
+
 const app = express();
-const port = 3000;
+
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const avatarBaseURL = 'http://example.com/avatars/';
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const router = express.Router();
@@ -16,6 +16,26 @@ const db = mysql.createConnection({
     password: '717274',
     database: 'main',
 });
+db.connect((err) => {
+    if (err) {
+      console.error('连接数据库失败：', err);
+      return;
+    }
+    console.log('成功连接到数据库');
+  });
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'avatars'); // 保存的路径
+    },
+    filename: (req, file, cb) => {
+        const username = req.body.username;
+        const ext = path.extname(file.originalname); // 获取文件扩展名
+        cb(null, `${username}${ext}`); // 使用用户名作为文件名
+    }
+});
+
+const upload = multer({ storage: storage });
 
 app.post('/process-string', async (req, res) => {
     	const { inputString } = req.body; // 从请求体中获取输入的提问字符串
@@ -50,12 +70,12 @@ router.get('/questions/:id', (req, res) => {
     ), ReviewContents AS (
         SELECT Content FROM Reviews WHERE QuestionID = ?
     ), AnswerDetails AS (
-        SELECT a.*, u.Username, u.avatar, u.UserID
+        SELECT a.*, u.Username, u.avatar
         FROM Answers a
         JOIN Users u ON a.AnswererID = u.UserID
         WHERE a.QuestionID = ?
     ), TagDetails AS (
-        SELECT t.TagName
+        SELECT t.*
         FROM QuestionTags qt
         JOIN Tags t ON qt.TagID = t.TagID
         WHERE qt.QuestionID = ?
@@ -63,7 +83,7 @@ router.get('/questions/:id', (req, res) => {
     SELECT * FROM QuestionDetails;
     SELECT Content FROM ReviewContents;
     SELECT * FROM AnswerDetails;
-    SELECT TagName FROM TagDetails;`;
+    SELECT * FROM TagDetails;`;
 
     db.query(sql, [questionId, questionId, questionId, questionId], (error, results) => {
         if (error) return res.status(500).json({ error });
@@ -270,7 +290,92 @@ router.delete('/answers/:id', (req, res) => {
         res.json({ message: 'Answer successfully deleted' });
     });
 });
+router.post('/register', upload.single('avatar'),async (req, res) => {
+    const { username, password, email } = req.body;
+    
+    const avatarURI = `${req.protocol}://${req.get('host')}/avatars/${req.file.filename}`;
+    const query = 'INSERT INTO Users (Username, Password, Email, avatar) VALUES (?, ?, ?, ?)';
+    db.query(query, [username, password, email, avatarURI], (error, results) => {
+        if (error) {
+            // 捕捉重名错误
+            if (error.code === 'ER_DUP_ENTRY') {
+                res.status(409).send('Username already exists');
+            } else {
+                console.error('Database Insertion Error: ', error);
+                res.status(500).send('Database error');
+            }
+            return;
+        }
+        res.send('Registration successful');
+    });
+});
 
+// Login Endpoint
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+
+    if (!username || !password) {
+        return res.status(400).send('Username and password are required');
+    }
+
+    try {
+        const [user] = await db.promise().query(`SELECT * FROM Users WHERE Username = ?`, [username]);
+        if (!user.length) {
+            return res.json({ success: false });
+        }
+
+        const isMatch = await bcrypt.compare(password, user[0].Password);
+        if (!isMatch) {
+            return res.json({ success: false });
+        }
+
+        // Returning true for successful login
+        res.json({ success: true });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Server error');
+    }
+});
+app.post('/questions/:id/view', (req, res) => {
+    const questionId = req.params.id;
+    const query = `UPDATE Questions SET views = views + 1 WHERE QuestionID = ?`;
+
+    db.execute(query, [questionId], (error, results) => {
+        if (error) {
+            return res.status(500).json({ error: "Database error" });
+        }
+        res.json({ message: "View count updated successfully", affectedRows: results.affectedRows });
+    });
+});
+router.get('/tags', (req, res) => {
+    const query = 'SELECT TagID, TagName FROM Tags';
+    db.query(query, (err, results) => {
+        if (err) {
+            res.status(500).send('数据库查询失败');
+            console.error(err);
+        } else {
+            res.status(200).json(results);
+        }
+    });
+});
+
+// 路由：给定问题 ID 和标签 ID，添加对应关系
+router.post('/questiontags', (req, res) => {
+    const { QuestionID, TagID } = req.body;
+    const query = 'INSERT INTO QuestionTags (QuestionID, TagID) VALUES (?, ?)';
+    db.query(query, [QuestionID, TagID], (err, result) => {
+        if (err) {
+            res.status(500).send('添加对应关系失败');
+            console.error(err);
+        } else {
+            res.status(200).send('对应关系添加成功');
+        }
+    });
+});
+// Start the server
+
+app.use('/', router);
+const port = 3000;
 app.listen(port, () => {
     console.log(`App listening at http://localhost:${port}`);
 });

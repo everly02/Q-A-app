@@ -1,32 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:padding="16dp">
 
-    <EditText
-        android:id="@+id/editTextQuestionTitle"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/title_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/question_title"
-        android:inputType="text"/>
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+        app:hintEnabled="true"
+        app:hintTextAppearance="@style/TextAppearance.Material3.TitleLarge"
+        android:hint="Enter Title">
 
-    <EditText
-        android:id="@+id/editTextQuestionContent"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/title_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Include Rich Text Editor Layout -->
+    <include
+        layout="@layout/rich_editor"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/question_content"
-        android:inputType="textMultiLine"
-        android:lines="5"
-        android:gravity="top"/>
+        android:layout_height="200dp"
+        android:layout_weight="1" />
 
     <Button
-        android:id="@+id/buttonSubmitQuestion"
-        android:layout_width="wrap_content"
+        android:id="@+id/submit_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/submit_question" />
+        android:text="Submit"
+        />
 
 </LinearLayout>

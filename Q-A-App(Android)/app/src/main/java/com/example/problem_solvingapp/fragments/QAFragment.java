@@ -1,6 +1,9 @@
 package com.example.problem_solvingapp.fragments;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,9 +19,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.problem_solvingapp.ApiServiceSingleton;
 import com.example.problem_solvingapp.QuestionApiService;
 import com.example.problem_solvingapp.R;
 import com.example.problem_solvingapp.RetrofitClientInstance;
+import com.example.problem_solvingapp.activities.QuestionDetailActivity;
+import com.example.problem_solvingapp.adapters.OnItemClickListener;
 import com.example.problem_solvingapp.adapters.QACardAdapter;
 import com.example.problem_solvingapp.data.Question;
 
@@ -32,7 +38,7 @@ import retrofit2.Response;
 public class QAFragment extends Fragment {
     private RecyclerView recyclerView;
     private QACardAdapter adapter;
-    private List<Question> itemList;
+    private List<Question> itemList=new ArrayList<>();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +56,11 @@ public class QAFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        itemList = new ArrayList<>();
+
+        fetchQuestions();
         // TODO:
-        adapter = new QACardAdapter(itemList);
-        recyclerView.setAdapter(adapter);
+
+
     }
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -78,20 +85,19 @@ public class QAFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
     public void fetchQuestions() {
-        QuestionApiService service = RetrofitClientInstance.getRetrofitInstance().create(QuestionApiService.class);
+        QuestionApiService service = ApiServiceSingleton.getApiService();
         Call<List<Question>> call = service.getAllQuestions();
         call.enqueue(new Callback<List<Question>>() {
             @Override
-            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+            public void onResponse(@NonNull Call<List<Question>> call, @NonNull Response<List<Question>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     updateRecyclerView(response.body());
-                } else {
 
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Question>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Question>> call, @NonNull Throwable t) {
 
             }
         });
@@ -99,8 +105,15 @@ public class QAFragment extends Fragment {
     @SuppressLint("NotifyDataSetChanged")
     private void updateRecyclerView(List<Question> questions) {
 
-        QACardAdapter adapter = (QACardAdapter) recyclerView.getAdapter();
-        if (adapter != null) {
+        itemList = questions;
+        if (adapter == null) {
+            adapter = new QACardAdapter(itemList, position -> {
+                Intent intent = new Intent(getActivity(), QuestionDetailActivity.class);
+                intent.putExtra("questionID", itemList.get(position).getQuestionId());
+                startActivity(intent);
+            });
+            recyclerView.setAdapter(adapter);
+        } else {
             adapter.setItemList(questions);
             adapter.notifyDataSetChanged();
         }

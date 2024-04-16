@@ -1,35 +1,161 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+
+            app:navigationIcon="@drawable/ic_back"
+            app:title="问题详情">
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:id="@+id/questionTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:id="@+id/question_title"
+        android:textSize="24sp"
+        android:gravity="center_horizontal"/>
+
+    <WebView
+        android:id="@+id/question_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"/>
+
+    <com.google.android.flexbox.FlexboxLayout
+        android:id="@+id/tags_flexbox_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:flexWrap="wrap"
+        app:justifyContent="flex_start"
+        app:alignItems="stretch"
+        android:padding="8dp">
+    </com.google.android.flexbox.FlexboxLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Likes, Views, Comments layouts aligned to parent's right -->
+        <LinearLayout
+            android:id="@+id/card_layout"
+            android:paddingEnd="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            tools:ignore="RtlSymmetry">
+
+            <!-- Likes -->
+
+            <!-- Views -->
+            <include
+                android:id="@+id/ques_likes"
+                layout="@layout/small_card_approves" />
+
+            <include
+                android:id="@+id/ques_views"
+                layout="@layout/small_card_views" />
+
+            <!-- Comments -->
+            <include
+                android:id="@+id/ques_comments"
+                layout="@layout/small_card_reviews" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="8dp"
+        android:gravity="end">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/action_approve"
+            android:text="赞同"
+            style="?attr/materialButtonOutlinedStyle"
+             />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="不赞同"
+            android:id="@+id/action_disapprove"
+            style="?attr/materialButtonOutlinedStyle"
+
+            android:layout_marginStart="16dp" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/questionDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"/>
-
-    <Button
-        android:id="@+id/addAnswerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="添加回答"
-        app:cornerRadius="28dp"
-        style="@style/Widget.Material3.Button.TextButton"/>
+        android:paddingStart="64dp"
+        android:text="评论"
+        android:textSize="20sp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/answersRecyclerView"
+
+        android:id="@+id/recyclerview_comments"
+        android:paddingStart="64dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="8dp">
+
+        <Button
+            android:id="@+id/btn_add_review"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+
+            android:text="添加评论"
+            />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="回答"
+        android:textSize="20sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview_answers"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"/>
+    <Button
+        android:id="@+id/add_new_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?attr/materialButtonOutlinedStyle"
+        android:text="添加回答"
+        android:layout_margin="8dp"
+        />
 </LinearLayout>

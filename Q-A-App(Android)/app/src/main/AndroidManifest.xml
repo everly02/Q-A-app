@@ -28,6 +28,11 @@
         <activity android:name=".activities.QuestionDetailActivity">
         </activity>
         <activity android:name=".activities.AddAnswerActivity"/>
+        <activity android:name=".activities.LoginActivity">
+        </activity>
+        <activity android:name=".activities.RegisterActivity">
+        </activity>
+
     </application>
 
 </manifest>

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".AskaiFragment">
 
+
     <EditText
         android:id="@+id/message_input"
         android:layout_width="0dp"

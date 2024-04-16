@@ -10,10 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/titleTextView"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Title"
@@ -23,27 +27,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:justifyContent="space-between"
-            android:layout_marginTop="8dp">
+            android:padding="8dp"
+            android:layout_margin="8dp">
 
             <TextView
                 android:id="@+id/usernameTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
                 android:text="Username"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <!-- Likes -->
-                <include layout="@layout/small_card_approves" android:id="@+id/likesLayout"/>
+                <include
+                    android:id="@+id/likesLayout"
+                    layout="@layout/small_card_approves" />
                 <!-- Views -->
-                <include layout="@layout/small_card_views" android:id="@+id/viewsLayout"/>
+                <include
+                    android:id="@+id/viewsLayout"
+                    layout="@layout/small_card_views" />
                 <!-- Comments -->
-                <include layout="@layout/small_card_reviews" android:id="@+id/commentsLayout"/>
+                <include
+                    android:id="@+id/commentsLayout"
+                    layout="@layout/small_card_reviews" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
