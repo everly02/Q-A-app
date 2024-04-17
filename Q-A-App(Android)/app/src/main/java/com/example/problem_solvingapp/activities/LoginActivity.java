@@ -3,6 +3,7 @@ package com.example.problem_solvingapp.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
@@ -49,21 +50,23 @@ public class LoginActivity extends AppCompatActivity {
 
             // 发起登录请求
             QuestionApiService apiService = ApiServiceSingleton.getApiService();
-            apiService.login(loginRequest).enqueue(new Callback<Integer>() {
+            apiService.login(loginRequest).enqueue(new Callback<QuestionApiService.LoginResponse>() {
                 @Override
-                public void onResponse(Call<Integer> call, Response<Integer> response) {
+                public void onResponse(Call<QuestionApiService.LoginResponse> call, Response<QuestionApiService.LoginResponse> response) {
                     if (response.isSuccessful() && response.body() != null) {
-                        Integer myID = response.body();
+                        Toast.makeText(LoginActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
+                        int myID = response.body().getid();
                         LoginManager mng = new LoginManager(LoginActivity.this);
                         mng.saveLoginCredentials(username,password,myID);
-                        setResult(RESULT_OK);
+                        Intent returnIntent = new Intent();
+                        setResult(RESULT_OK,returnIntent);
                         finish();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<Integer> call, Throwable t) {
-                    // 处理请求失败的情况
+                public void onFailure(Call<QuestionApiService.LoginResponse> call, Throwable t) {
+                    Toast.makeText(LoginActivity.this, "invalid input", Toast.LENGTH_SHORT).show();
                 }
             });
         });
@@ -72,7 +75,6 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
             startActivityForResult(intent,register_code);
         });
-
 
     }
     int register_code;

@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import android.view.MenuItem;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,10 +36,13 @@ public class MainActivity extends AppCompatActivity {
         LoginManager loginManager = new LoginManager(this);
 
         if (!loginManager.tryAutoLogin()) {
+            Toast.makeText(this, "您需要登录", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-            startActivityForResult(intent, LOGIN_CODE);
+            startActivity(intent);
+            finish();
         }
         else{
+            Toast.makeText(this, "当前用户："+param_username, Toast.LENGTH_SHORT).show();
             setupBottomNavigation();
         }
 
@@ -66,17 +71,6 @@ public class MainActivity extends AppCompatActivity {
         });
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new QAFragment()).commit();
     }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == LOGIN_CODE) {
-            if (resultCode == RESULT_OK) {
-                setupBottomNavigation();
-            } else {
-                finish();
-            }
-        }
-    }
 
 }

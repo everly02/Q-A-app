@@ -1,6 +1,5 @@
 package com.example.problem_solvingapp;
 
-import com.example.problem_solvingapp.data.Answer;
 import com.example.problem_solvingapp.data.NewAnswer;
 import com.example.problem_solvingapp.data.NewQuestion;
 import com.example.problem_solvingapp.data.NewReview;
@@ -20,6 +19,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -77,9 +77,7 @@ public interface QuestionApiService {
     @FormUrlEncoded
     Call<ResponseBody> addQuestionTag(@Field("QuestionID") int questionID, @Field("TagID") int tagID);
 
-    class RegisterResponse {
-        int id;
-    }
+
 
     class LoginRequest {
         final String username;
@@ -91,8 +89,23 @@ public interface QuestionApiService {
         }
     }
 
+    class LoginResponse {
+        final int id;
+
+        public int getid(){
+            return id;
+        }
+        public LoginResponse(int id) {
+            this.id = id;
+        }
+    }
     @POST("/login")
-    Call<Integer> login(@Body LoginRequest body);
+    Call<LoginResponse> login(@Body LoginRequest body);
+
+    class RegisterResponse {
+        int id;
+    }
+    @Multipart
     @POST("/register")
     Call<RegisterResponse> register(
             @Part("username") RequestBody username,

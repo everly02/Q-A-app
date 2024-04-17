@@ -1,10 +1,11 @@
 const express = require('express');
 const mysql = require('mysql2');
-
+const multer = require('multer');
+const bcrypt = require('bcrypt');
 const app = express();
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
-const avatarBaseURL = 'http://example.com/avatars/';
+
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const router = express.Router();
@@ -12,7 +13,7 @@ app.use(express.json());
 
 const db = mysql.createConnection({
     host: 'localhost', // or your database server's address
-    user: 'u0',
+    user: 'u1',
     password: '717274',
     database: 'main',
 });

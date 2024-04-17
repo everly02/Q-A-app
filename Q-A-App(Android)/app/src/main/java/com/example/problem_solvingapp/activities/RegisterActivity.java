@@ -111,8 +111,6 @@ public class RegisterActivity extends AppCompatActivity {
             });
         }
 
-        // 发起注册请求
-
 
     }
 }

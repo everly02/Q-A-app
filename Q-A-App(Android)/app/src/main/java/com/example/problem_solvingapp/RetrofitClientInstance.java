@@ -14,7 +14,7 @@ public class RetrofitClientInstance {
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
             .create();
     private static Retrofit retrofit;
-    private static final String BASE_URL = "http://20.39.192.103:3000";
+    private static final String BASE_URL = "http://144.24.128.121:3000";
 
     public static Retrofit getRetrofitInstance() {
         if (retrofit == null) {
