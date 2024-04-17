@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.problem_solvingapp.AskaiFragment;
+import com.example.problem_solvingapp.LoginCallback;
 import com.example.problem_solvingapp.LoginManager;
 import com.example.problem_solvingapp.R;
 import com.example.problem_solvingapp.fragments.ProfileFragment;
@@ -35,16 +36,21 @@ public class MainActivity extends AppCompatActivity {
         param_id = sharedPreferences.getInt("id", -99);
         LoginManager loginManager = new LoginManager(this);
 
-        if (!loginManager.tryAutoLogin()) {
-            Toast.makeText(this, "您需要登录", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
-        else{
-            Toast.makeText(this, "当前用户："+param_username, Toast.LENGTH_SHORT).show();
-            setupBottomNavigation();
-        }
+        loginManager.tryAutoLogin(new LoginCallback() {
+            @Override
+            public void onLoginSuccess() {
+                Toast.makeText(MainActivity.this, "当前用户："+param_username, Toast.LENGTH_SHORT).show();
+                setupBottomNavigation();
+            }
+
+            @Override
+            public void onLoginFailure() {
+                Toast.makeText(MainActivity.this, "您需要登录", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
     }
     private void setupBottomNavigation() {

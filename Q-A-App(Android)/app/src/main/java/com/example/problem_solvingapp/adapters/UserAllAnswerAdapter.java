@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.problem_solvingapp.R;
 import com.example.problem_solvingapp.data.answer_of_user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAllAnswerAdapter extends RecyclerView.Adapter<UserAllAnswerAdapter.ViewHolder> {

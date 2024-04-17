@@ -19,6 +19,7 @@ import com.example.problem_solvingapp.adapters.QACardAdapter;
 
 import com.example.problem_solvingapp.data.Question;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,12 +31,13 @@ public class userQuestionFragment extends Fragment {
 
     public userQuestionFragment() {
     }
-    private List<Question> itemlist;
+    private List<Question> itemlist = new ArrayList<>();
 
     private static String arg_user_id;
 
     int instance_id;
 
+    List<Question> my_questions = new ArrayList<>();
     public static userQuestionFragment newInstance(int id) {
         userQuestionFragment fragment = new userQuestionFragment();
         Bundle args = new Bundle();
@@ -51,6 +53,7 @@ public class userQuestionFragment extends Fragment {
         if(getArguments()!=null){
             instance_id = getArguments().getInt(arg_user_id);
         }
+
     }
 
     @Override
@@ -59,6 +62,7 @@ public class userQuestionFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.user_content_recycler,container,false);
         RecyclerView recyclerView = view.findViewById(R.id.user_content_recyclerView);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         QuestionApiService service = ApiServiceSingleton.getApiService();
         Call<List<Question>> call = service.getMyQuestions(instance_id);

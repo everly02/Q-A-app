@@ -20,6 +20,7 @@ import com.example.problem_solvingapp.data.Answer;
 import com.example.problem_solvingapp.data.Question;
 import com.example.problem_solvingapp.data.answer_of_user;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -30,7 +31,7 @@ import retrofit2.Response;
 public class userAnswerFragment extends Fragment {
 
     public userAnswerFragment(){}
-    private List<answer_of_user> itemlist;
+    private List<answer_of_user> itemlist = new ArrayList<>();
 
     private static String arg_user_id;
     int instance_id;

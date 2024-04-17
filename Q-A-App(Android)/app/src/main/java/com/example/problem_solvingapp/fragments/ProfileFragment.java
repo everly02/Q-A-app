@@ -41,10 +41,6 @@ public class ProfileFragment extends Fragment {
 
     private static final String  ARG_USER_ID = "user id";
     private static final String ARG_USER_NAME = "user name";
-    private RecyclerView my_questions;
-    private List<Question> itemList_questions;
-
-    private List<Answer> itemList_Answers;
 
     private int instance_user_id;
     private String instance_username;
@@ -101,8 +97,7 @@ public class ProfileFragment extends Fragment {
         new TabLayoutMediator(UserTabLayout, viewpager,
                 (tab, position) -> tab.setText(position == 0 ? "问题" : "解答")).attach();
 
-        my_questions = my_questions.findViewById(R.id.user_content_recyclerView);
-        my_questions.setLayoutManager(new LinearLayoutManager(getContext()));
+
 
         userNameView.setText("Username: " + instance_username);
 

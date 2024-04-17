@@ -53,14 +53,17 @@ public class LoginActivity extends AppCompatActivity {
             apiService.login(loginRequest).enqueue(new Callback<QuestionApiService.LoginResponse>() {
                 @Override
                 public void onResponse(Call<QuestionApiService.LoginResponse> call, Response<QuestionApiService.LoginResponse> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        Toast.makeText(LoginActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
-                        int myID = response.body().getid();
-                        LoginManager mng = new LoginManager(LoginActivity.this);
-                        mng.saveLoginCredentials(username,password,myID);
-                        Intent returnIntent = new Intent();
-                        setResult(RESULT_OK,returnIntent);
-                        finish();
+                    if (response.isSuccessful()) {
+                        assert response.body() != null;
+                        if (response.body() .getid() >0) {
+                            Toast.makeText(LoginActivity.this, "验证成功", Toast.LENGTH_SHORT).show();
+                            int myID = response.body().getid();
+                            LoginManager mng = new LoginManager(LoginActivity.this);
+                            mng.saveLoginCredentials(username, password, myID);
+                            Intent returnIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            setResult(RESULT_OK, returnIntent);
+                            finish();
+                        }
                     }
                 }
 
