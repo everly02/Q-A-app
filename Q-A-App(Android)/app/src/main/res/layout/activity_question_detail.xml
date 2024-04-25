@@ -53,11 +53,11 @@
         <!-- Likes, Views, Comments layouts aligned to parent's right -->
         <LinearLayout
             android:id="@+id/card_layout"
-            android:paddingEnd="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_alignParentEnd="true"
+            android:orientation="horizontal"
+            android:paddingEnd="8dp"
             tools:ignore="RtlSymmetry">
 
             <!-- Likes -->
@@ -109,7 +109,8 @@
         android:layout_height="wrap_content"
         android:paddingStart="64dp"
         android:text="评论"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
 
@@ -142,9 +143,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="回答"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:layout_marginLeft="16dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginLeft="16dp"
         android:id="@+id/recyclerview_answers"
         android:layout_width="match_parent"
         android:layout_height="0dp"

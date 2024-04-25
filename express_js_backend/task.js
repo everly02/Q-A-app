@@ -2,6 +2,8 @@ const express = require('express');
 const mysql = require('mysql2');
 const multer = require('multer');
 const bcrypt = require('bcrypt');
+const path = require('path');
+const morgan = require('morgan');
 const app = express();
 
 const { GoogleGenerativeAI } = require("@google/generative-ai");
@@ -10,10 +12,10 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const router = express.Router();
 app.use(express.json());
-
+app.use(morgan('combined'));
 const db = mysql.createConnection({
     host: 'localhost', // or your database server's address
-    user: 'u1',
+    user: 'u0',
     password: '717274',
     database: 'main',
 });
@@ -62,40 +64,55 @@ router.get('/questions', (req, res) => {
         res.json({ questions: results });
     });
 });
-router.get('/questions/:id', (req, res) => {
+app.get('/questions/:id', (req, res) => {
     const questionId = req.params.id;
-    // Assuming MySQL 8.0+ for CTE usage for cleaner SQL
-    const sql = `
-    WITH QuestionDetails AS (
-        SELECT * FROM Questions WHERE QuestionID = ?
-    ), ReviewContents AS (
-        SELECT Content FROM Reviews WHERE QuestionID = ?
-    ), AnswerDetails AS (
-        SELECT a.*, u.Username, u.avatar
-        FROM Answers a
-        JOIN Users u ON a.AnswererID = u.UserID
-        WHERE a.QuestionID = ?
-    ), TagDetails AS (
-        SELECT t.*
-        FROM QuestionTags qt
-        JOIN Tags t ON qt.TagID = t.TagID
-        WHERE qt.QuestionID = ?
-    )
-    SELECT * FROM QuestionDetails;
-    SELECT Content FROM ReviewContents;
-    SELECT * FROM AnswerDetails;
-    SELECT * FROM TagDetails;`;
-
-    db.query(sql, [questionId, questionId, questionId, questionId], (error, results) => {
-        if (error) return res.status(500).json({ error });
-        res.json({
-            question: results[0],
-            reviews: results[1],
-            answers: results[2],
-            tags: results[3]
-        });
+  
+    // 构造SQL查询语句
+    const sqlQuery = `
+      SELECT q.Title AS QuestionTitle, q.Content AS QuestionContent, q.approves AS Approves, q.views AS Views,
+             GROUP_CONCAT(DISTINCT a.Content) AS AnswerContent,
+             GROUP_CONCAT(DISTINCT a.approves) AS AnswerApproves,
+             GROUP_CONCAT(DISTINCT u.Username) AS AnswererUsername,
+             GROUP_CONCAT(DISTINCT u.avatar) AS AnswererAvatar,
+             GROUP_CONCAT(DISTINCT r.Content) AS ReviewContent,
+             GROUP_CONCAT(DISTINCT t.TagName) AS Tags
+      FROM Question q
+      LEFT JOIN Answers a ON q.QuestionID = a.QuestionID
+      LEFT JOIN Users u ON a.AnswererID = u.UserID
+      LEFT JOIN Reviews r ON q.QuestionID = r.QuestionID
+      LEFT JOIN Tags t ON t.QuestionID = q.QuestionID
+      WHERE q.QuestionID = ?
+      GROUP BY q.QuestionID
+    `;
+  
+    // 执行查询
+    connection.query(sqlQuery, [questionId], (error, results) => {
+      if (error) {
+        console.error('Error querying database:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+  
+      
+      const formattedResults = results.map(result => {
+        return {
+          QuestionTitle: result.QuestionTitle,
+          QuestionContent: result.QuestionContent,
+            Approves: result.approves,
+            Views: result.views,
+          Answers: result.AnswerContent.split(','), 
+          AnswerApproves: result.AnswerApproves.split(','), 
+          Answerers: result.AnswererUsername.split(','), 
+          AnswererAvatars: result.AnswererAvatar.split(','), 
+          Reviews: result.ReviewContent.split(','), 
+          Tags: result.Tags.split(',') 
+        };
+      });
+  
+      
+      res.json(formattedResults);
     });
-});
+  });
 router.get('/users/:id/questions', (req, res) => {
     const userId = req.params.id;
     const sql = `
@@ -230,6 +247,25 @@ router.patch('/answers/:id/approves', (req, res) => {
         res.json({ message: `Answer approves successfully ${action === 'increment' ? 'incremented' : 'decremented'}` });
     });
 });
+router.patch('/questions/:id/views', (req, res) => {
+    const { QuestionID } = req.params;
+  if (!QuestionID) {
+    return res.status(400).send('QuestionID is required');
+  }
+
+  // SQL 更新语句
+  const query = 'UPDATE Questions SET views = views + 1 WHERE QuestionID = ?';
+
+  db.query(query, [QuestionID], (error, results) => {
+    if (error) {
+      return res.status(500).send('Error updating views count');
+    }
+    if (results.affectedRows === 0) {
+      return res.status(404).send('Question not found');
+    }
+    res.status(200).send('Views incremented successfully');
+  });
+});
 router.delete('/questions/:id', (req, res) => {
     const QuestionID = req.params.id;
 
@@ -295,8 +331,9 @@ router.post('/register', upload.single('avatar'),async (req, res) => {
     const { username, password, email } = req.body;
     
     const avatarURI = `${req.protocol}://${req.get('host')}/avatars/${req.file.filename}`;
+    const hashedPassword = await bcrypt.hash(password, 10);
     const query = 'INSERT INTO Users (Username, Password, Email, avatar) VALUES (?, ?, ?, ?)';
-    db.query(query, [username, password, email, avatarURI], (error, results) => {
+    db.query(query, [username, hashedPassword, email, avatarURI], (error, results) => {
         if (error) {
             // 捕捉重名错误
             if (error.code === 'ER_DUP_ENTRY') {
@@ -316,22 +353,22 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-        return res.status(400).send('Username and password are required');
+        return res.json({ id:-10});
     }
 
     try {
         const [user] = await db.promise().query(`SELECT * FROM Users WHERE Username = ?`, [username]);
         if (!user.length) {
-            return res.json({ success: false });
+            return res.json({ id:-20});
         }
 
         const isMatch = await bcrypt.compare(password, user[0].Password);
         if (!isMatch) {
-            return res.json({ success: false });
+            return res.json({ success:"-30"});
         }
 
         // Returning true for successful login
-        res.json({ success: true });
+        res.json({ id: user[0].UserID });
     } catch (error) {
         console.error(error);
         res.status(500).send('Server error');
