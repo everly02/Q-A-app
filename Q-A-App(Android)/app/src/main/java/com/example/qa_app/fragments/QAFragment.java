@@ -22,6 +22,7 @@ import com.example.qa_app.ApiServiceSingleton;
 import com.example.qa_app.QuestionApiService;
 import com.example.qa_app.R;
 import com.example.qa_app.activities.AskQuestionActivity;
+import com.example.qa_app.activities.MainActivity;
 import com.example.qa_app.activities.QuestionDetailActivity;
 import com.example.qa_app.adapters.QACardAdapter;
 import com.example.qa_app.data.Question;
@@ -58,6 +59,14 @@ public class QAFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        FloatingActionButton ask_button = view.findViewById(R.id.add_question_fab);
+        ask_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AskQuestionActivity.class);
+                startActivity(intent);
+            }
+        });
         adapter = new QACardAdapter(new ArrayList<>(), position -> {
             Intent intent = new Intent(getActivity(), QuestionDetailActivity.class);
             intent.putExtra("questionID", itemList.get(position).getQuestionId());

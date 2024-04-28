@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Problem-Solving app</string>
+    <string name="app_name">QA App</string>
     <string name="question_title">Question Title</string>
     <string name="question_content">Question Content</string>
     <string name="submit_question">Submit Question</string>

@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.qa_app"
-        minSdk = 24
+        minSdk = 30
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -47,4 +47,5 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation ("com.google.android.flexbox:flexbox:3.0.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("jp.wasabeef:richeditor-android:2.0.0")
 }
