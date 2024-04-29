@@ -34,7 +34,7 @@
         android:id="@+id/question_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"/>
+        />
 
     <com.google.android.flexbox.FlexboxLayout
         android:id="@+id/tags_flexbox_layout"

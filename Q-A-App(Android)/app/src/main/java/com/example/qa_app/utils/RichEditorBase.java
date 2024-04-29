@@ -15,8 +15,10 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ImageSpan;
 import android.text.style.URLSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -92,24 +94,31 @@ public abstract class RichEditorBase extends AppCompatActivity {
     }
     protected EditText editText;
     private static final int REQUEST_CODE_PICK_IMAGE = 1001;
+    Button insertImageButton;
+    Button addLinkButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
         editText = findViewById(R.id.edittext_rich_text);
-        setupRichTextEditor();
-    }
-
-    protected abstract int getLayoutId(); // 子类提供布局ID
-
-    private void setupRichTextEditor() {
-        findViewById(R.id.button_insert_image).setOnClickListener(v -> {
+        insertImageButton = findViewById(R.id.button_insert_image);
+        addLinkButton = findViewById(R.id.button_add_link);
+        insertImageButton.setOnClickListener(v -> {
+            Log.d("button listened", "adding img");
             checkReadMediaImagesPermission();
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);
         });
-        findViewById(R.id.button_add_link).setOnClickListener(v -> showEditLinkDialog());
+        addLinkButton.setOnClickListener(v -> {
+            Log.d("button listened", "adding hlink");
+            showEditLinkDialog();
+        });
+        Log.d("ActivityLifecycle", "ContentView set");
+        
     }
+
+    protected abstract int getLayoutId(); // 子类提供布局ID
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

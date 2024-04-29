@@ -15,7 +15,6 @@ import com.example.qa_app.QuestionApiService;
 import com.example.qa_app.R;
 import com.example.qa_app.data.NewQuestion;
 import com.example.qa_app.utils.RichEditorBase;
-import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
@@ -28,24 +27,22 @@ public class AskQuestionActivity extends RichEditorBase {
 
     private TextInputEditText titleInput;
     private EditText editText;
-    private Button submit_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ask_question);
 
         titleInput = findViewById(R.id.title_input);
         editText = findViewById(R.id.edittext_rich_text);
-        submit_btn = findViewById(R.id.submit_button);
+        Button submit_btn = findViewById(R.id.submit_button);
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 submitQuestion();
-                finish();
             }
         });
 
-        findViewById(R.id.submit_button).setOnClickListener(v -> submitQuestion());
+
     }
 
 

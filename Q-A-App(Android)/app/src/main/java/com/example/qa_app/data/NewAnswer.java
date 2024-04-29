@@ -2,12 +2,12 @@ package com.example.qa_app.data;
 
 public class NewAnswer {
 
-    private int answererId;
-    private String content;
+    private int AnswererID;
+    private String Content;
 
 
     public NewAnswer(String answerContent,int answererId) {
-        this.content = answerContent;
-        this. answererId = answererId;
+        this.Content = answerContent;
+        this. AnswererID = answererId;
     }
 }
