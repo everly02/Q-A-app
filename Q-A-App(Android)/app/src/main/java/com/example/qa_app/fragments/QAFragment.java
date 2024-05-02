@@ -44,13 +44,13 @@ public class QAFragment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Indicate that this fragment would like to influence the set of actions in the action bar.
+
         setHasOptionsMenu(true);
+
     }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         return inflater.inflate(R.layout.fragment_qa, container, false);
     }
@@ -78,9 +78,10 @@ public class QAFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.top_app_bar, menu);
+
         super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+
     }
 
     @Override
@@ -88,11 +89,6 @@ public class QAFragment extends Fragment {
 
         int id = item.getItemId();
 
-        if (id == R.id.action_filt) {
-            return true;
-        } else if (id == R.id.action_sort) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }

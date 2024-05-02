@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -31,7 +33,11 @@ public class AskaiFragment extends Fragment {
     private ChatAdapter chatAdapter;
     private final List<String> messages = new ArrayList<>();
     private EditText messageInput;
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
     @SuppressLint("NotifyDataSetChanged")
     @Nullable
     @Override
@@ -59,7 +65,13 @@ public class AskaiFragment extends Fragment {
 
         return view;
     }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
 
+    }
     private void sendMessageToBackend(String message) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://20.39.192.103:3000")

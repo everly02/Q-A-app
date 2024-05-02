@@ -6,11 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -41,6 +44,13 @@ public class ProfileFragment extends Fragment {
             instance_user_id = getArguments().getInt(ARG_USER_ID);
             instance_username = getArguments().getString(ARG_USER_NAME);
         }
+        setHasOptionsMenu(true);
+    }
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
     }
     public static ProfileFragment newInstance(int userId,String username){
         ProfileFragment ProfileFragement_instance = new ProfileFragment();

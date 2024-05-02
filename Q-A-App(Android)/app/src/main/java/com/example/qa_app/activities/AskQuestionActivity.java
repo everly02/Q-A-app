@@ -3,6 +3,8 @@ package com.example.qa_app.activities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,9 +55,9 @@ public class AskQuestionActivity extends RichEditorBase {
 
     private void submitQuestion() {
         String title = Objects.requireNonNull(titleInput.getText()).toString().trim();
-        String content = editText.getText().toString().trim();
-
-        if(title.isEmpty() || content.isEmpty()){
+        Spanned content = editText.getText();
+        String new_question_content = Html.toHtml(content, Html.TO_HTML_PARAGRAPH_LINES_CONSECUTIVE);
+        if(title.isEmpty() || content.toString().trim().isEmpty()){
             Toast.makeText(this, "Title and content cannot be empty.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -64,7 +66,7 @@ public class AskQuestionActivity extends RichEditorBase {
         Context context = this;
         SharedPreferences sharedPreferences = context.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE);
 
-        NewQuestion newques = new NewQuestion(sharedPreferences.getInt("ID",-999),title,content);
+        NewQuestion newques = new NewQuestion(sharedPreferences.getInt("ID",-999),title,new_question_content);
         Call<Void> call = service.addQuestion(newques);
         call.enqueue(new Callback<Void>() {
             @Override

@@ -2,6 +2,7 @@ package com.example.qa_app.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -66,6 +68,9 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
 
                     questionTitle.setText(detail.getQuestionTitle());
                     questionContent.loadDataWithBaseURL(null, detail.getQuestionContent(), "text/html", "utf-8", null);
+
+                    questionContent.setBackgroundColor(Color.TRANSPARENT);
+                    questionContent.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null); // 为了防止滚动条等引起的渲染问题
 
                     add_review_btn = findViewById(R.id.btn_add_review);
                     add_review_btn.setOnClickListener(v -> {
@@ -148,7 +153,7 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
                         AnswerAdapter answerAdapter = new AnswerAdapter(QuestionDetailActivity.this,answers);
                         recyclerViewAnswers.setAdapter(answerAdapter);
                     } else {
-                        recyclerViewAnswers.setAdapter(new AnswerAdapter(QuestionDetailActivity.this,new ArrayList<>())); // 设置一个空的Answer列表
+                        recyclerViewAnswers.setAdapter(new AnswerAdapter(QuestionDetailActivity.this,new ArrayList<>()));
                     }
                 }
             }
@@ -174,7 +179,17 @@ public class QuestionDetailActivity extends AppCompatActivity implements View.On
                     String comment = editTextComment.getText().toString();
                     if (!comment.isEmpty()) {
                         QuestionApiService apiservice = ApiServiceSingleton.getApiService();
-                        apiservice.addCommentToQuestion(questionID,new NewReview(comment));
+                        apiservice.addCommentToQuestion(questionID,new NewReview(comment)).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                                Toast.makeText(activity, "succeeded", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable throwable) {
+                                Toast.makeText(activity, "failed", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 })
                 .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())

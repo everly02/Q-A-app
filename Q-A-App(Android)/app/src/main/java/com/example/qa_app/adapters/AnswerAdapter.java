@@ -1,9 +1,11 @@
 package com.example.qa_app.adapters;
 
+import androidx.annotation.ColorInt;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.qa_app.adapters.OnItemClickListener;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +48,8 @@ public class AnswerAdapter extends RecyclerView.Adapter<AnswerAdapter.ViewHolder
         holder.contentWebView.setWebViewClient(new WebViewClient()); // Ensure redirects stay within the WebView
         holder.contentWebView.loadData(answer.getContent(), "text/html", "UTF-8");
         holder.approvesTextView.setText(String.valueOf(answer.getApproves()));
+        holder.contentWebView.setBackgroundColor(Color.TRANSPARENT);
+        holder.contentWebView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
         holder.approve_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
